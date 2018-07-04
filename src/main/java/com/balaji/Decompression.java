@@ -15,6 +15,7 @@ class Decompression {
     int i = 0;
     while (i < charArray.length) {
       char c = charArray[i];
+      // Get the full number before the '['
       if (Character.isDigit(c)) {
         int base = 0;
         while (Character.isDigit(c)) {
@@ -22,22 +23,27 @@ class Decompression {
           c = charArray[++i];
         }
       }
+
+      // Find the full representation within '[' and ']'
       if (c == '[') {
-        int openBracket = 1;
         StringBuilder temp = new StringBuilder();
         c = charArray[++i];
-        if(c == ']') openBracket = 0;
+        // handle empty '[]' case.
+        int openBracket = (c == ']') ? 0 : 1;
         while (openBracket != 0) {
           temp.append(c);
           c = charArray[++i];
           if (c == '[') openBracket++;
           if (c == ']') openBracket--;
         }
-        while (repeat > 0) {
-          result.append(decompress(temp.toString()));
-          repeat--;
+
+        //recurse to find inner compressed strings.
+        String decompressed = decompress(temp.toString());
+        while (repeat-- > 0) {
+          result.append(decompressed);
         }
       } else {
+        // append individual characters that are not prefixed with numbers.
         result.append(c);
       }
       i++;
