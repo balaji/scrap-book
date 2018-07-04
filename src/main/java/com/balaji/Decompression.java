@@ -15,12 +15,10 @@ class Decompression {
     for (int i = 0; i < charArray.length; i++) {
       char c = charArray[i];
       // Get the full number before the '['
-      if (Character.isDigit(c)) {
-        int base = 0;
-        while (Character.isDigit(c)) {
-          repeat = (repeat * base++ * 10) + Character.getNumericValue(c);
-          c = charArray[++i];
-        }
+      int base = 0;
+      while (Character.isDigit(c)) {
+        repeat = (repeat * base++ * 10) + Character.getNumericValue(c);
+        c = charArray[++i];
       }
 
       // Find the full representation within '[' and ']'
