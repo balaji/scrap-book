@@ -12,8 +12,7 @@ class Decompression {
     int repeat = 0;
     StringBuilder result = new StringBuilder();
 
-    int i = 0;
-    while (i < charArray.length) {
+    for (int i = 0; i < charArray.length; i++) {
       char c = charArray[i];
       // Get the full number before the '['
       if (Character.isDigit(c)) {
@@ -46,7 +45,6 @@ class Decompression {
         // append individual characters that are not prefixed with numbers.
         result.append(c);
       }
-      i++;
     }
     return result.toString();
   }
