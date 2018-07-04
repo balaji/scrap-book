@@ -17,5 +17,8 @@ public class DecompressionTest {
     assertThat(Decompression.decompress("2[ab]c"), is("ababc"));
     assertThat(Decompression.decompress("2[a]2[b]c"), is("aabbc"));
     assertThat(Decompression.decompress("2[a3[f]]c"), is("afffafffc"));
+    assertThat(Decompression.decompress("a[]b"), is("ab"));
+    assertThat(Decompression.decompress("0[abc]"), is(""));
+    assertThat(Decompression.decompress("1[a]"), is("a"));
   }
 }

@@ -2,6 +2,11 @@ package com.balaji;
 
 class Decompression {
 
+  /**
+   * https://techdevguide.withgoogle.com/paths/advanced/compress-decompression/#!
+   * @param compressed compressed string.
+   * @return decompressed string.
+   */
   static String decompress(String compressed) {
     char[] charArray = compressed.toCharArray();
     int repeat = 0;
@@ -21,6 +26,7 @@ class Decompression {
         int openBracket = 1;
         StringBuilder temp = new StringBuilder();
         c = charArray[++i];
+        if(c == ']') openBracket = 0;
         while (openBracket != 0) {
           temp.append(c);
           c = charArray[++i];
